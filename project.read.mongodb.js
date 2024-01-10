@@ -23,16 +23,18 @@ use("firstDatabase");
 // db.projectReadOp.find({status:{$eq: "Running"}})
 
 //? find movies whose status is Ended and runtime is 60
-// db.projectReadOp.find({ $or: [{ status: "Ended" }, { runtime: 60 }] });
+// db.projectReadOp.find({ $and: [{ status: "Ended" }, { runtime: 60 }] });
+// Shortcut:
+// db.projectReadOp.find({ status: "Ended", runtime: 60 });
 
 // ?find movies whose weight is 75 and network country is Canada
 // db.projectReadOp.find({ $and: [{ weight: 75 }, { "network.country.name": "Canada" }] });
 
 // ?find movies whose weight is 96 or runtime is 60
-// db.projectReadOp.find({ $and: [{ weight:96 }, { runtime: 60 }] });
-
+// db.projectReadOp.find({ $or: [{ weight:96 }, { runtime: 60 }] });
+// db.projectReadOp.find();
 // ? find movies whose rating average is not 9
-// db.projectReadOp.find({ $nor:[{ "rating.average": 9 }] },{name:1,rating:1});
+// db.projectReadOp.find({ "rating.average": { $ne: 9 } }, { name: 1, rating: 1 });
 
 // ? find movies whose rating average is either 6 or 6.5 or 9 or 8 or 8.5 or 8.6 or 7.7 or 6.1 or 7.8
 // db.projectReadOp.find(
@@ -51,3 +53,38 @@ use("firstDatabase");
 //   },
 //   { name: 1, rating: 1 }
 // );
+
+//---------------------------------------------------------------------------
+
+//? $in
+//? Alternate of $or
+// db.projectReadOp.find({"rating.average":{$in:[6,6.5,9,8,8.5,8.6,7.7,3.1,7.8]}})
+
+//? $nin
+//? Alternate of $nor
+// db.projectReadOp.find({"rating.average":{$nin:[6,6.5,9,8,8.5,8.6,7.7,3.1,7.8]}})
+
+//===========================================================================
+
+//? array
+//? $all, $elemMatch, $size
+//find movies whose genres is both Drama and Thriller
+// db.projectReadOp.find({$and:[{genres: "Drama"},{genres:"Thriller"}]})
+
+//? $all
+//? Alternate of $and same field in array
+// db.projectReadOp.find({genres:{$all:["Thriller", "Drama"]}})
+
+// db.newStudent.find({});
+// db.newStudent.find({hobbies:{$all:["Dancing", "Singing"]}})
+
+//? $elemMatch=> In array match single element all condition
+// db.newStudent.find({
+//   scores: { $elemMatch: { sub: "Math", point: { $gt: 70 } } },
+// });
+
+// db.scores.insertMany([
+//   { results: [ 82, 85, 88 ] },
+// { results: [ 75, 88, 89 ] }
+// ])
+db.scores.find({ results: { $elemMatch: { $gt: 80, $lt: 85 } } });
