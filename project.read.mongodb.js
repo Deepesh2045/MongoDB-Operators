@@ -87,4 +87,59 @@ use("firstDatabase");
 //   { results: [ 82, 85, 88 ] },
 // { results: [ 75, 88, 89 ] }
 // ])
-db.scores.find({ results: { $elemMatch: { $gt: 80, $lt: 85 } } });
+// db.scores.find({ results: { $elemMatch: { $gt: 80, $lt: 85 } } });
+// db.newStudent.find()
+//? $size
+// db.newStudent.find({ hobbies: { $size: 2 } });
+//-----------------------------------------------------
+//? evaluation Operator:
+db.movies.find()
+//? $regex
+// => case insensitive
+// db.movies.find({ name: { $regex: "dome", $options: "i" } });
+// db.movies.find({ summary: { $regex: "the pacific", $options: "i" } });
+
+//? $expr:
+// find sales data whose order is greater than volume
+// need for filed compression
+// db.sales.find();
+
+// db.sales.find({$expr:{$gt:["$order","$volume"]}})
+
+//=====================Assignment==============================
+// ?find movies whose genre includes Action and Crime
+// db.movies.find();
+
+// db.movies.find({genres:{$all:["Action", "Crime"]}})
+
+// ? find movies whose genre size is 2
+// db.movies.find({genres:{$size:2}})
+// ? find movies whose genre size is not equal to 2
+// db.movies.find({genres:{$ne:{$size:2}}})
+
+// ? find movies whose language is not English
+// db.movies.find({language:{$ne:"English"}})
+
+// ? find movies whose summary includes "Pacific"
+// db.movies.find({summary:{$regex:"Pacific",$options: "i"}})
+
+// ? find students whose hobby is neither Swimming nor Dancing
+//  db.newStudent.find()
+// db.newStudent.find({$nor:[{hobbies: "Swimming"},{hobbies:"Dancing"}]})
+
+// ?find students whose hobby is both Gaming and Singing
+// db.newStudent.find({hobbies:{ $all:["Gaming","Singing"]} });
+
+// ?find students who have three hobbies
+// db.newStudent.find({hobbies:{$size:3}})
+
+// ?find students whose math score is greater than 50
+// db.newStudent.find({
+//   scores: { $elemMatch: { sub: "Math", point: { $gt: 50 } } },
+// });
+
+// ?find students whose score in any subject is greater than 70
+// db.newStudent.find({"scores.point":{$gt:70}})
+
+// ? find students whose primary id is "656070d2b16daaa31169a51b"
+// db.newStudent.find({ _id: ObjectId("656070d2b16daaa31169a51b") });
