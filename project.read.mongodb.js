@@ -89,11 +89,15 @@ use("firstDatabase");
 // ])
 // db.scores.find({ results: { $elemMatch: { $gt: 80, $lt: 85 } } });
 // db.newStudent.find()
+
 //? $size
 // db.newStudent.find({ hobbies: { $size: 2 } });
-//-----------------------------------------------------
+
+//=====================================================================
+
 //? evaluation Operator:
-db.movies.find()
+// db.movies.find()
+
 //? $regex
 // => case insensitive
 // db.movies.find({ name: { $regex: "dome", $options: "i" } });
@@ -104,9 +108,10 @@ db.movies.find()
 // need for filed compression
 // db.sales.find();
 
-// db.sales.find({$expr:{$gt:["$order","$volume"]}})
+// db.sales.find({ $expr: { $gt: ["$order", "$volume"] } });
 
 //=====================Assignment==============================
+
 // ?find movies whose genre includes Action and Crime
 // db.movies.find();
 
@@ -114,11 +119,12 @@ db.movies.find()
 
 // ? find movies whose genre size is 2
 // db.movies.find({genres:{$size:2}})
+
 // ? find movies whose genre size is not equal to 2
 // db.movies.find({genres:{$ne:{$size:2}}})
 
 // ? find movies whose language is not English
-// db.movies.find({language:{$ne:"English"}})
+// db.movies.find({ language: { $ne: "English" } });
 
 // ? find movies whose summary includes "Pacific"
 // db.movies.find({summary:{$regex:"Pacific",$options: "i"}})
@@ -143,3 +149,6 @@ db.movies.find()
 
 // ? find students whose primary id is "656070d2b16daaa31169a51b"
 // db.newStudent.find({ _id: ObjectId("656070d2b16daaa31169a51b") });
+
+// db.mystu.find();
+// db.mystu.find({ scores: { $elemMatch: { type: "quiz", score: { $gt: 10 } } } });
