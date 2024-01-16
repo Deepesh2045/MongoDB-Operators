@@ -146,3 +146,28 @@ use("firstDatabase");
 // );
 
 // db.friends.find();
+
+//? $[identifier]
+
+// db.besties.updateOne(
+//   { name: "Sulochan" },
+//   {
+//     $set: {
+//       "scores.$[element].point": 69,
+//     },
+//   },
+//   { arrayFilters: [{ "element.point": { $lt: 60 } }] }
+// );
+
+//? Update Scores less than 75 by 10 marks of Sulochan
+db.besties.updateOne(
+  { name: "Sulochan" },
+  {
+    $inc: {
+      "scores.$[item].point": 5,
+    },
+  },
+  { arrayFilters: [{ "item.point": { $lt: 75 } }] }
+);
+
+db.besties.find();
