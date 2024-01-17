@@ -124,5 +124,9 @@ use("firstDatabase");
 //     },
 //   }
 // );
-
+db.besties.updateMany({},{
+    $set: {
+        Contact: 9849153576
+    }
+})
 db.besties.find();
