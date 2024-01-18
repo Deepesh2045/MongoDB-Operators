@@ -63,21 +63,21 @@ use("firstDatabase");
 //   },
 // ]);
 
-db.newMovies.aggregate([
-  {
-    $match: {
-      genres: { $all: ["Action", "Thriller"] },
-    },
-  },
-  {
-    $project: {
-      movieName: { $toLower: "$name" },
-      genres: 1,
-    },
-  },
-  {
-    $sort: {
-      movieName: -1,
-    },
-  },
-]);
+// db.newMovies.aggregate([
+//   {
+//     $match: {
+//       genres: { $all: ["Action", "Thriller"] },
+//     },
+//   },
+//   {
+//     $project: {
+//       movieName: { $toLower: "$name" },
+//       genres: 1,
+//     },
+//   },
+//   {
+//     $sort: {
+//       movieName: -1,
+//     },
+//   },
+// ]);
